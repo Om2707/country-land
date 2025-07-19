@@ -2,7 +2,7 @@ import{ lazy, Suspense, useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
 
-const Home = lazy(() => import('../../country-land/src/pages/Home'));
+const Home = lazy(() => import('./pages/Home'));
 
 
 
