@@ -1,98 +1,116 @@
 import { useEffect, useState } from 'react';
 
 const LoadingFallback = () => {
-  const [dots, setDots] = useState(1);
+  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setDots(prev => prev < 3 ? prev + 1 : 1);
-    }, 500);
+    const progressInterval = setInterval(() => {
+      setProgress(prev => prev < 100 ? prev + 1 : 0);
+    }, 50);
 
-    return () => clearInterval(interval);
+    return () => clearInterval(progressInterval);
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-gradient-to-br from-green-50 to-lime-50 text-slate-800">
-      <div className="relative w-32 h-32 flex items-center justify-center mb-8">
-        {/* SVG Plant Animation */}
-        <svg
-          viewBox="0 0 100 100"
-          className="w-full h-full"
-        >
-          <defs>
-            <linearGradient id="plantGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#34d399" /> {/* Emerald 400 */}
-              <stop offset="100%" stopColor="#84cc16" /> {/* Lime 500 */}
-            </linearGradient>
-          </defs>
-          {/* Stem */}
-          <path
-            d="M50 90 V10"
-            fill="none"
-            stroke="url(#plantGradient)"
-            strokeWidth="6"
-            strokeLinecap="round"
-            strokeDasharray="80"
-            strokeDashoffset="80"
-            className="animate-stem"
-          />
-          {/* Leaf 1 */}
-          <path
-            d="M50 50 Q65 35 75 50 Q65 65 50 50"
-            fill="url(#plantGradient)"
-            className="animate-leaf-1"
-            style={{ transformOrigin: '50% 50%', opacity: 0 }}
-          />
-          {/* Leaf 2 */}
-          <path
-            d="M50 50 Q35 35 25 50 Q35 65 50 50"
-            fill="url(#plantGradient)"
-            className="animate-leaf-2"
-            style={{ transformOrigin: '50% 50%', opacity: 0 }}
-          />
-        </svg>
-      </div>
+    <div className="flex flex-col items-center justify-center h-screen bg-gradient-to-br from-slate-50 to-gray-100">
 
-      <div className="text-center text-2xl font-semibold text-green-700">
-        Loading Country Land{'.'.repeat(dots)}
+      {/* Main loading container */}
+      <div className="flex flex-col items-center">
+        {/* Rotating leaf icon */}
+        <div className="w-12 h-12 mb-8 text-emerald-500 animate-spin">
+          <svg
+            viewBox="0 0 24 24"
+            className="w-full h-full"
+            fill="currentColor"
+          >
+            <path d="M17,8C8,10 5.9,16.17 3.82,21.34L5.71,22L6.66,19.7C7.14,19.87 7.64,20 8,20C19,20 22,3 22,3C21,5 14,5.25 9,6.25C4,7.25 2,11.5 2,13.5C2,15.5 3.75,17.25 3.75,17.25C7,8 17,8 17,8Z"/>
+          </svg>
+        </div>
+
+        {/* Loading text */}
+        <div className="text-center mb-6">
+          <h2 className="text-2xl font-semibold text-gray-800 mb-2">
+            Country Land
+          </h2>
+          <p className="text-gray-600">
+            Loading
+          </p>
+        </div>
+
+        {/* Clean progress bar */}
+        <div className="w-64 h-1 bg-gray-200 rounded-full overflow-hidden">
+          <div 
+            className="h-full bg-emerald-500 rounded-full transition-all duration-100 ease-out"
+            style={{ width: `${progress}%` }}
+          ></div>
+        </div>
       </div>
 
       <style jsx>{`
-        @keyframes stemGrowth {
-          0% {
-            stroke-dashoffset: 80;
-          }
-          50% {
-            stroke-dashoffset: 0;
-          }
-          100% {
-            stroke-dashoffset: 0;
-          }
+        @keyframes spin-slow {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
         }
 
-        @keyframes leafAppearance {
-          0% {
-            opacity: 0;
-            transform: scale(0.5);
+        @keyframes spin-reverse {
+          from { transform: rotate(360deg); }
+          to { transform: rotate(0deg); }
+        }
+
+        @keyframes float {
+          0%, 100% { 
+            transform: translateY(0px) scale(1);
+            opacity: 0.7;
           }
-          100% {
+          50% { 
+            transform: translateY(-20px) scale(1.1);
             opacity: 1;
-            transform: scale(1);
           }
         }
 
-        .animate-stem {
-          animation: stemGrowth 2s ease-out infinite;
+        @keyframes pulse-scale {
+          0%, 100% { 
+            transform: scale(1);
+            box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
+          }
+          50% { 
+            transform: scale(1.05);
+            box-shadow: 0 15px 35px rgba(16, 185, 129, 0.4);
+          }
         }
 
-        .animate-leaf-1 {
-          animation: leafAppearance 0.8s ease-out infinite;
-          animation-delay: 1.5s; /* Start leaf animation after stem is mostly grown */
+        @keyframes gentle-sway {
+          0%, 100% { transform: rotate(-2deg); }
+          50% { transform: rotate(2deg); }
         }
 
-        .animate-leaf-2 {
-          animation: leafAppearance 0.8s ease-out infinite;
-          animation-delay: 1.8s; /* Stagger second leaf */
+        @keyframes shimmer {
+          0% { transform: translateX(-100%); }
+          100% { transform: translateX(200%); }
+        }
+
+        .animate-spin-slow {
+          animation: spin-slow 3s linear infinite;
+        }
+
+        .animate-spin-reverse {
+          animation: spin-reverse 2s linear infinite;
+        }
+
+        .animate-float {
+          animation: float 3s ease-in-out infinite;
+        }
+
+        .animate-pulse-scale {
+          animation: pulse-scale 2s ease-in-out infinite;
+        }
+
+        .animate-gentle-sway {
+          animation: gentle-sway 3s ease-in-out infinite;
+        }
+
+        .animate-shimmer {
+          animation: shimmer 1.5s ease-in-out infinite;
         }
       `}</style>
     </div>
