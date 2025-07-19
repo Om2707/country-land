@@ -88,10 +88,10 @@ const MangoCarousel = () => {
   };
 
   return (
-   <div className="w-full min-h-screen bg-gradient-to-br from-gray-50 to-green-50 pt-16 sm:pt-6 md:pt-8 lg:pt-12 pb-4 sm:pb-6 lg:pb-8 px-2 sm:px-4 lg:px-6 xl:px-8">
+   <div className="w-full bg-gradient-to-br from-gray-50 to-green-50 pt-16 sm:pt-6 md:pt-8 lg:pt-12 pb-0 sm:pb-6 lg:pb-8 px-2 sm:px-4 lg:px-6 xl:px-8">
       <div className="relative w-full max-w-full mx-auto bg-white rounded-lg sm:rounded-xl lg:rounded-2xl xl:rounded-3xl overflow-hidden shadow-lg border border-gray-100">
         {/* Main Carousel Container */}
-        <div className="relative min-h-[600px] sm:h-[380px] md:h-[420px] lg:h-[440px] xl:h-[460px] overflow-hidden">
+        <div className="relative min-h-[680px] sm:h-[380px] md:h-[420px] lg:h-[440px] xl:h-[460px] overflow-hidden">
           {slides.map((slide, index) => (
             <div
               key={index}
@@ -106,15 +106,15 @@ const MangoCarousel = () => {
               {/* Background Gradient */}
               <div className={`absolute inset-0 bg-gradient-to-br ${slide.bgGradient} opacity-30`} />
               
-              <div className="relative flex flex-col lg:flex-row h-full min-h-[600px] sm:min-h-[380px] lg:min-h-0">
+              <div className="relative flex flex-col lg:flex-row h-full min-h-[680px] sm:min-h-[380px] lg:min-h-0">
                 {/* Right Visual - Mobile First */}
-                <div className="flex-1 relative overflow-hidden min-h-[240px] sm:min-h-[240px] lg:min-h-0 order-2 lg:order-2">
+                <div className="flex-1 relative overflow-hidden min-h-[260px] sm:min-h-[240px] lg:min-h-0 order-2 lg:order-2">
                   <div className={`transform transition-all duration-1000 delay-400 ${
                     index === currentSlide && isVisible
                       ? 'translate-x-0 opacity-100 scale-100'
                       : 'translate-x-8 opacity-0 scale-95'
                   }`}>
-                    <div className="relative h-full flex items-center justify-center p-2 sm:p-4 lg:p-6 pt-6 sm:pt-4">
+                    <div className="relative h-full flex items-center justify-center p-3 sm:p-4 lg:p-6 pt-6 sm:pt-4">
                       {/* Main Visual Card */}
                       <div className={`relative w-full max-w-[260px] sm:max-w-[300px] md:max-w-sm h-full min-h-[200px] sm:min-h-[220px] bg-gradient-to-br ${slide.cardGradient} rounded-xl sm:rounded-2xl shadow-xl border ${slide.borderColor}`}>
                         <div className="absolute inset-0 bg-gradient-to-br from-white/50 to-transparent rounded-xl sm:rounded-2xl" />
@@ -168,7 +168,7 @@ const MangoCarousel = () => {
                 </div>
 
                 {/* Left Content */}
-                <div className="flex-1 p-3 sm:p-5 md:p-6 lg:p-8 xl:p-10 flex flex-col justify-center order-1 lg:order-1 min-h-[360px] sm:min-h-[140px] lg:min-h-0">
+                <div className="flex-1 p-4 sm:p-5 md:p-6 lg:p-8 xl:p-10 flex flex-col justify-center order-1 lg:order-1 min-h-[400px] sm:min-h-[140px] lg:min-h-0">
                   <div className={`transform transition-all duration-1000 delay-300 ${
                     index === currentSlide && isVisible
                       ? 'translate-y-0 opacity-100'
