@@ -12,41 +12,8 @@ const LoadingFallback = () => {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-gradient-to-br from-slate-50 to-gray-100">
-
-      {/* Main loading container */}
-      <div className="flex flex-col items-center">
-        {/* Rotating leaf icon */}
-        <div className="w-12 h-12 mb-8 text-emerald-500 animate-spin">
-          <svg
-            viewBox="0 0 24 24"
-            className="w-full h-full"
-            fill="currentColor"
-          >
-            <path d="M17,8C8,10 5.9,16.17 3.82,21.34L5.71,22L6.66,19.7C7.14,19.87 7.64,20 8,20C19,20 22,3 22,3C21,5 14,5.25 9,6.25C4,7.25 2,11.5 2,13.5C2,15.5 3.75,17.25 3.75,17.25C7,8 17,8 17,8Z"/>
-          </svg>
-        </div>
-
-        {/* Loading text */}
-        <div className="text-center mb-6">
-          <h2 className="text-2xl font-semibold text-gray-800 mb-2">
-            Country Land
-          </h2>
-          <p className="text-gray-600">
-            Loading
-          </p>
-        </div>
-
-        {/* Clean progress bar */}
-        <div className="w-64 h-1 bg-gray-200 rounded-full overflow-hidden">
-          <div 
-            className="h-full bg-emerald-500 rounded-full transition-all duration-100 ease-out"
-            style={{ width: `${progress}%` }}
-          ></div>
-        </div>
-      </div>
-
-      <style jsx>{`
+    <>
+      <style>{`
         @keyframes spin-slow {
           from { transform: rotate(0deg); }
           to { transform: rotate(360deg); }
@@ -113,7 +80,41 @@ const LoadingFallback = () => {
           animation: shimmer 1.5s ease-in-out infinite;
         }
       `}</style>
-    </div>
+      
+      <div className="flex flex-col items-center justify-center h-screen bg-gradient-to-br from-slate-50 to-gray-100">
+        {/* Main loading container */}
+        <div className="flex flex-col items-center">
+          {/* Rotating leaf icon */}
+          <div className="w-12 h-12 mb-8 text-emerald-500 animate-spin">
+            <svg
+              viewBox="0 0 24 24"
+              className="w-full h-full"
+              fill="currentColor"
+            >
+              <path d="M17,8C8,10 5.9,16.17 3.82,21.34L5.71,22L6.66,19.7C7.14,19.87 7.64,20 8,20C19,20 22,3 22,3C21,5 14,5.25 9,6.25C4,7.25 2,11.5 2,13.5C2,15.5 3.75,17.25 3.75,17.25C7,8 17,8 17,8Z"/>
+            </svg>
+          </div>
+
+          {/* Loading text */}
+          <div className="text-center mb-6">
+            <h2 className="text-2xl font-semibold text-gray-800 mb-2">
+              Country Land
+            </h2>
+            <p className="text-gray-600">
+              Loading
+            </p>
+          </div>
+
+          {/* Clean progress bar */}
+          <div className="w-64 h-1 bg-gray-200 rounded-full overflow-hidden">
+            <div 
+              className="h-full bg-emerald-500 rounded-full transition-all duration-100 ease-out"
+              style={{ width: `${progress}%` }}
+            ></div>
+          </div>
+        </div>
+      </div>
+    </>
   );
 };
 

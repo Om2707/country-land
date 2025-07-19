@@ -88,10 +88,10 @@ const MangoCarousel = () => {
   };
 
   return (
-    <div className="w-full min-h-screen bg-gradient-to-br from-gray-50 to-green-50 pt-4 sm:pt-8 md:pt-12 lg:pt-16 pb-4 sm:pb-6 lg:pb-8 px-2 sm:px-4 lg:px-6 xl:px-8">
+   <div className="w-full min-h-screen bg-gradient-to-br from-gray-50 to-green-50 pt-20 sm:pt-8 md:pt-12 lg:pt-16 pb-4 sm:pb-6 lg:pb-8 px-2 sm:px-4 lg:px-6 xl:px-8">
       <div className="relative w-full max-w-full mx-auto bg-white rounded-lg sm:rounded-xl lg:rounded-2xl xl:rounded-3xl overflow-hidden shadow-lg border border-gray-100">
         {/* Main Carousel Container */}
-        <div className="relative min-h-[600px] sm:h-[450px] md:h-[500px] lg:h-[550px] xl:h-[600px] overflow-hidden">
+        <div className="relative min-h-[750px] sm:h-[450px] md:h-[500px] lg:h-[500px] xl:h-[520px] overflow-hidden">
           {slides.map((slide, index) => (
             <div
               key={index}
@@ -106,9 +106,69 @@ const MangoCarousel = () => {
               {/* Background Gradient */}
               <div className={`absolute inset-0 bg-gradient-to-br ${slide.bgGradient} opacity-30`} />
               
-              <div className="relative flex flex-col lg:flex-row h-full min-h-[600px] sm:min-h-[450px] lg:min-h-0">
+              <div className="relative flex flex-col lg:flex-row h-full min-h-[750px] sm:min-h-[450px] lg:min-h-0">
+                {/* Right Visual - Mobile First */}
+                <div className="flex-1 relative overflow-hidden min-h-[280px] sm:min-h-[300px] lg:min-h-0 order-1 lg:order-2">
+                  <div className={`transform transition-all duration-1000 delay-400 ${
+                    index === currentSlide && isVisible
+                      ? 'translate-x-0 opacity-100 scale-100'
+                      : 'translate-x-8 opacity-0 scale-95'
+                  }`}>
+                    <div className="relative h-full flex items-center justify-center p-3 sm:p-6 lg:p-8">
+                      {/* Main Visual Card */}
+                      <div className={`relative w-full max-w-[280px] sm:max-w-sm md:max-w-md h-full min-h-[240px] sm:min-h-[280px] bg-gradient-to-br ${slide.cardGradient} rounded-xl sm:rounded-2xl shadow-xl border ${slide.borderColor}`}>
+                        <div className="absolute inset-0 bg-gradient-to-br from-white/50 to-transparent rounded-xl sm:rounded-2xl" />
+                        
+                        <div className="relative h-full flex flex-col items-center justify-center p-3 sm:p-6 lg:p-8">
+                          {/* Icon */}
+                          <div className={`w-12 h-12 sm:w-20 sm:h-20 lg:w-24 lg:h-24 bg-gradient-to-br ${slide.gradient} rounded-xl shadow-lg flex items-center justify-center mb-3 sm:mb-6 transform hover:scale-105 transition-all duration-300`}>
+                            <slide.icon className="w-6 h-6 sm:w-10 sm:h-10 lg:w-12 lg:h-12 text-white" />
+                          </div>
+                          
+                          {/* Mango Image */}
+                          <div className={`w-12 h-12 sm:w-20 sm:h-20 lg:w-24 lg:h-24 bg-gradient-to-br ${slide.cardGradient} rounded-full flex items-center justify-center mb-3 sm:mb-6 shadow-md overflow-hidden border-2 ${slide.borderColor}`}>
+                            <img 
+                              src="/mango.png" 
+                              alt="Fresh Mango" 
+                              className="w-full h-full object-cover rounded-full scale-110"
+                              onError={(e) => {
+                                e.target.style.display = 'none';
+                                e.target.nextSibling.style.display = 'block';
+                              }}
+                            />
+                            <div className="w-full h-full bg-gradient-to-br from-orange-400 to-orange-500 rounded-full flex items-center justify-center hidden">
+                              <span className="text-white font-bold text-lg sm:text-2xl">🥭</span>
+                            </div>
+                          </div>
+                          
+                          {/* Text */}
+                          <h3 className="text-sm sm:text-lg lg:text-xl font-bold text-gray-800 text-center mb-1 sm:mb-2">
+                            Premium Mango Collection
+                          </h3>
+                          <p className="text-gray-600 text-center text-xs sm:text-base mb-2 sm:mb-4">
+                            Farm Fresh • Quality Assured
+                          </p>
+                          
+                          {/* Rating */}
+                          <div className="flex items-center gap-1 mb-2 sm:mb-4">
+                            {[...Array(5)].map((_, i) => (
+                              <Star key={i} className="w-3 h-3 sm:w-4 sm:h-4 fill-yellow-400 text-yellow-400" />
+                            ))}
+                            <span className="text-xs sm:text-sm font-semibold text-gray-600 ml-1 sm:ml-2">4.9/5</span>
+                          </div>
+                          
+                          {/* Organic Badge */}
+                          <div className={`px-2 sm:px-4 py-1 sm:py-2 bg-gradient-to-r ${slide.gradient} text-white text-xs sm:text-sm font-semibold rounded-full shadow-md`}>
+                            100% ORGANIC
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
                 {/* Left Content */}
-                <div className="flex-1 p-4 sm:p-6 md:p-8 lg:p-10 xl:p-12 flex flex-col justify-center order-2 lg:order-1 min-h-[300px] sm:min-h-[200px] lg:min-h-0">
+                <div className="flex-1 p-4 sm:p-6 md:p-8 lg:p-10 xl:p-12 flex flex-col justify-center order-2 lg:order-1 min-h-[450px] sm:min-h-[200px] lg:min-h-0">
                   <div className={`transform transition-all duration-1000 delay-300 ${
                     index === currentSlide && isVisible
                       ? 'translate-y-0 opacity-100'
@@ -122,7 +182,7 @@ const MangoCarousel = () => {
                       </span>
                     </div>
 
-                    <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-800 mb-2 sm:mb-3 lg:mb-4 leading-tight">
+                    <h1 className="text-xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-800 mb-2 sm:mb-3 lg:mb-4 leading-tight">
                       {slide.title === "Your Mango, Your Market" ? (
                         <>
                           <span className="bg-gradient-to-r from-yellow-600 via-yellow-500 to-yellow-400 bg-clip-text text-transparent">
@@ -149,7 +209,7 @@ const MangoCarousel = () => {
                       ? 'translate-y-0 opacity-100'
                       : 'translate-y-8 opacity-0'
                   }`}>
-                    <h2 className="text-base sm:text-lg md:text-xl lg:text-2xl font-semibold text-gray-700 mb-2 sm:mb-3 lg:mb-4 flex items-center gap-2">
+                    <h2 className="text-sm sm:text-lg md:text-xl lg:text-2xl font-semibold text-gray-700 mb-2 sm:mb-3 lg:mb-4 flex items-center gap-2">
                       <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-green-500" />
                       {slide.subtitle}
                     </h2>
@@ -164,16 +224,16 @@ const MangoCarousel = () => {
                       : 'translate-y-8 opacity-0'
                   }`}>
                     <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-4 sm:mb-6 lg:mb-8">
-                      <button className={`bg-gradient-to-r ${slide.gradient} text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg sm:rounded-xl font-semibold hover:shadow-lg transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 group text-sm sm:text-base`}>
+                      <button className={`bg-gradient-to-r ${slide.gradient} text-white px-5 sm:px-8 py-2.5 sm:py-4 rounded-lg sm:rounded-xl font-semibold hover:shadow-lg transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 group text-sm sm:text-base`}>
                         <span>Get Started</span>
                         <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
                       </button>
-                      <button className={`border-2 ${slide.borderColor} ${slide.textColor} px-6 sm:px-8 py-3 sm:py-4 rounded-lg sm:rounded-xl font-semibold ${slide.hoverBg} ${slide.hoverBorder} transition-all duration-300 text-sm sm:text-base`}>
+                      <button className={`border-2 ${slide.borderColor} ${slide.textColor} px-5 sm:px-8 py-2.5 sm:py-4 rounded-lg sm:rounded-xl font-semibold ${slide.hoverBg} ${slide.hoverBorder} transition-all duration-300 text-sm sm:text-base`}>
                         Learn More
                       </button>
                     </div>
 
-                    <div className="flex flex-col sm:flex-row sm:flex-wrap gap-3 sm:gap-4 lg:gap-6">
+                    <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4 lg:gap-6">
                       {slide.features.map((feature, featureIndex) => (
                         <div
                           key={featureIndex}
@@ -193,81 +253,21 @@ const MangoCarousel = () => {
                     </div>
                   </div>
                 </div>
-
-                {/* Right Visual */}
-                <div className="flex-1 relative overflow-hidden min-h-[280px] sm:min-h-[300px] lg:min-h-0 order-1 lg:order-2">
-                  <div className={`transform transition-all duration-1000 delay-400 ${
-                    index === currentSlide && isVisible
-                      ? 'translate-x-0 opacity-100 scale-100'
-                      : 'translate-x-8 opacity-0 scale-95'
-                  }`}>
-                    <div className="relative h-full flex items-center justify-center p-4 sm:p-6 lg:p-8">
-                      {/* Main Visual Card */}
-                      <div className={`relative w-full max-w-xs sm:max-w-sm md:max-w-md h-full min-h-[240px] sm:min-h-[280px] bg-gradient-to-br ${slide.cardGradient} rounded-xl sm:rounded-2xl shadow-xl border ${slide.borderColor}`}>
-                        <div className="absolute inset-0 bg-gradient-to-br from-white/50 to-transparent rounded-xl sm:rounded-2xl" />
-                        
-                        <div className="relative h-full flex flex-col items-center justify-center p-4 sm:p-6 lg:p-8">
-                          {/* Icon */}
-                          <div className={`w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 bg-gradient-to-br ${slide.gradient} rounded-xl shadow-lg flex items-center justify-center mb-4 sm:mb-6 transform hover:scale-105 transition-all duration-300`}>
-                            <slide.icon className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 text-white" />
-                          </div>
-                          
-                          {/* Mango Image */}
-                          <div className={`w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 bg-gradient-to-br ${slide.cardGradient} rounded-full flex items-center justify-center mb-4 sm:mb-6 shadow-md overflow-hidden border-2 ${slide.borderColor}`}>
-                            <img 
-                              src="/mango.png" 
-                              alt="Fresh Mango" 
-                              className="w-full h-full object-cover rounded-full scale-110"
-                              onError={(e) => {
-                                e.target.style.display = 'none';
-                                e.target.nextSibling.style.display = 'block';
-                              }}
-                            />
-                            <div className="w-full h-full bg-gradient-to-br from-orange-400 to-orange-500 rounded-full flex items-center justify-center hidden">
-                              <span className="text-white font-bold text-xl sm:text-2xl">🥭</span>
-                            </div>
-                          </div>
-                          
-                          {/* Text */}
-                          <h3 className="text-base sm:text-lg lg:text-xl font-bold text-gray-800 text-center mb-2">
-                            Premium Mango Collection
-                          </h3>
-                          <p className="text-gray-600 text-center text-sm sm:text-base mb-3 sm:mb-4">
-                            Farm Fresh • Quality Assured
-                          </p>
-                          
-                          {/* Rating */}
-                          <div className="flex items-center gap-1 mb-3 sm:mb-4">
-                            {[...Array(5)].map((_, i) => (
-                              <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                            ))}
-                            <span className="text-sm font-semibold text-gray-600 ml-2">4.9/5</span>
-                          </div>
-                          
-                          {/* Organic Badge */}
-                          <div className={`px-3 sm:px-4 py-1.5 sm:py-2 bg-gradient-to-r ${slide.gradient} text-white text-xs sm:text-sm font-semibold rounded-full shadow-md`}>
-                            100% ORGANIC
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           ))}
         </div>
 
-        {/* Navigation Arrows */}
+        {/* Navigation Arrows - Hidden on mobile */}
         <button
           onClick={prevSlide}
-          className="absolute left-2 sm:left-4 lg:left-6 top-1/2 -translate-y-1/2 bg-white hover:bg-green-50 text-green-700 p-2 sm:p-3 rounded-full shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-110 border border-green-200 z-10"
+          className="hidden sm:block absolute left-2 sm:left-4 lg:left-6 top-1/2 -translate-y-1/2 bg-white hover:bg-green-50 text-green-700 p-2 sm:p-3 rounded-full shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-110 border border-green-200 z-10"
         >
           <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
         </button>
         <button
           onClick={nextSlide}
-          className="absolute right-2 sm:right-4 lg:right-6 top-1/2 -translate-y-1/2 bg-white hover:bg-green-50 text-green-700 p-2 sm:p-3 rounded-full shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-110 border border-green-200 z-10"
+          className="hidden sm:block absolute right-2 sm:right-4 lg:right-6 top-1/2 -translate-y-1/2 bg-white hover:bg-green-50 text-green-700 p-2 sm:p-3 rounded-full shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-110 border border-green-200 z-10"
         >
           <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
         </button>
